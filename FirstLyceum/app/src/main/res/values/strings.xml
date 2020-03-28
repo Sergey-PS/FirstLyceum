@@ -5,4 +5,6 @@
     <string name="Hide_point">Скрыть пунк меню</string>
     <string name="hide_group">Скрыть группу</string>
     <string name="text_color">Цвет текста</string>
+    <string name="newActivite">Новая Activite</string>
+    <string name="Context">Get Context</string>
 </resources>

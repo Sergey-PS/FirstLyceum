@@ -3,11 +3,13 @@ package kz.flyceum.firstlyceum;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Annotation;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mButSub;
     Button mButMul;
     Button mButDel;
+    Button mNewActive;
     EditText mTextOne;
     EditText mTextTwo;
 
@@ -48,9 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mButSub = findViewById(R.id.butSub);
     mButMul = findViewById(R.id.butMul);
     mButDel = findViewById(R.id.butDel);
+    mNewActive = findViewById(R.id.newActiv);
 
     mTextOne = findViewById(R.id.editOne);
     mTextTwo = findViewById(R.id.editTwo);
+
 
     registerForContextMenu(mAnime);
 
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mButSub.setOnClickListener(this);
     mButMul.setOnClickListener(this);
     mButDel.setOnClickListener(this);
+    mNewActive.setOnClickListener(this);
+
     }
 
     @Override
@@ -128,6 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String oper = ".";
         float result = 0;
 
+        if (v.getId() == R.id.newActiv) {
+            Intent intent = new Intent(this, ActivityTwo.class);
+            startActivity(intent);
+        }
         if (TextUtils.isEmpty(mTextOne.getText().toString()) || TextUtils.isEmpty(mTextTwo.getText().toString())) {
             Toast.makeText(MainActivity.this, " Поля пустые", Toast.LENGTH_SHORT);
             return;
@@ -159,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
         }
-
 
         mResult.setText(num1 + " " + oper + " " + num2 + " = " + result);
 
