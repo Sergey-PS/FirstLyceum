@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">First Lyceum</string>
+    <string name="app_name">Первый лицей</string>
+    <string name="action_settings">Reset</string>
+    <string name="action_quit">Quit</string>
+    <string name="Hide_point">Скрыть пунк меню</string>
+    <string name="hide_group">Скрыть группу</string>
+    <string name="text_color">Цвет текста</string>
 </resources>
