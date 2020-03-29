@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Annotation;
 import android.text.TextUtils;
@@ -29,9 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button mButSub;
     Button mButMul;
     Button mButDel;
+    Button mTime;
     Button mNewActive;
     EditText mTextOne;
     EditText mTextTwo;
+    EditText mTextName;
+    Button mBtnMap;
+    Button mBtnWeb;
+    Button mBtnCall;
 
     final int MENU_ALPHA_ID = 1;
     final int MENU_SCALE_ID = 2;
@@ -52,9 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mButMul = findViewById(R.id.butMul);
     mButDel = findViewById(R.id.butDel);
     mNewActive = findViewById(R.id.newActiv);
+    mTime = findViewById(R.id.btn_time);
+    mBtnMap = findViewById(R.id.btnMap);
+    mBtnWeb = findViewById(R.id.btnWeb);
+    mBtnCall = findViewById(R.id.btnCall);
 
     mTextOne = findViewById(R.id.editOne);
     mTextTwo = findViewById(R.id.editTwo);
+    mTextName = findViewById(R.id.editName);
 
 
     registerForContextMenu(mAnime);
@@ -64,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     mButMul.setOnClickListener(this);
     mButDel.setOnClickListener(this);
     mNewActive.setOnClickListener(this);
+    mBtnWeb.setOnClickListener(this);
+    mBtnMap.setOnClickListener(this);
+    mBtnCall.setOnClickListener(this);
+    mTime.setOnClickListener(this);
 
     }
 
@@ -134,11 +149,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         float num2;
         String oper = ".";
         float result = 0;
+        int idV = 0;
+        Intent intent = null;
 
-        if (v.getId() == R.id.newActiv) {
-            Intent intent = new Intent(this, ActivityTwo.class);
+         idV = v.getId();
+
+         switch (idV) {
+             case R.id.btnWeb:
+                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://flyceum.kz"));
+                 startActivity(intent);
+                 break;
+             case R.id.btnMap:
+                 intent = new Intent(Intent.ACTION_VIEW);
+                 intent.setData(Uri.parse("geo:54.872030,69.147742"));
+                 startActivity(intent);
+                 break;
+             case R.id.btnCall:
+                 intent = new Intent(Intent.ACTION_DIAL);
+                 intent.setData(Uri.parse("tel:12124324"));
+                 startActivity(intent);
+                 break;
+         }
+
+        if (idV == R.id.newActiv) {
+            intent = new Intent(this, ActivityTwo.class);
+            intent.putExtra("name", mTextName.getText().toString());
             startActivity(intent);
         }
+        if (idV == R.id.btn_time) {
+            intent = new Intent(this, WebActivity.class);
+            startActivity(intent);
+        }
+
         if (TextUtils.isEmpty(mTextOne.getText().toString()) || TextUtils.isEmpty(mTextTwo.getText().toString())) {
             Toast.makeText(MainActivity.this, " Поля пустые", Toast.LENGTH_SHORT);
             return;
